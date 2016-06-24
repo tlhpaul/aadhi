@@ -1,0 +1,42 @@
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>
+					Device IP
+				</th>
+				<th>
+					Scenario Name
+				</th>
+				<th>
+					URL
+				</th>
+				<th>
+					Method
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+      <%unless @notfound_list.blank? || @notfound_list.empty? || @notfound_list.nil?%>
+				<%@notfound_list.each do |notfound|%>
+					<tr>
+						<td>
+							<%=notfound.device_ip%>
+						</td>
+						<td style="word-break: break-all;">
+							<%=notfound.scenario_name%>
+						</td>
+						<td style="word-break: break-all;">
+							<%=notfound.url%>
+						</td>
+						<td>
+							<%=notfound.method%>
+						</td>
+					</tr>
+				<%end%>
+      <%end%>
+		</tbody>
+	</table>
+
+

@@ -1,0 +1,70 @@
+
+  <%- model_class = Feature -%>
+  
+<form name="features_export" action="features/export" method="post" onSubmit="if(!confirm('are you sure?')){return false;}">
+  <table class="table table-striped" style="align:center">
+    <thead>
+      <tr>
+        <th>Feature (<%=@features.count%>)</th>
+        <th></th>
+        <th style="text-align:center">Flows / Scenarios</th>
+        <th style="text-align:center">Select Feature <br/> <input type="checkbox" id="selectAll" value="selectAll"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%scenario_count=0%>
+    <% @features.each do |feature| %>
+      <tr>
+        <td><%= link_to feature.feature_name, feature_path(feature) %>  </td>
+
+         <td> <%= link_to edit_feature_path(feature), class: 'btn btn-default' do %>
+         <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>   </td>
+          <td style="text-align:center">
+            <%=feature.flows.count%> /
+            <%feature.flows.each do |flow| 
+              scenario_count+=flow.scenarios.count 
+            end%>
+            <%=scenario_count%>
+            <%scenario_count=0%>
+          </td>
+       
+        <td style="text-align:center"> <%= check_box_tag "feature_ids[]", feature.id %></td>
+      </tr>
+    <% end %>
+      <tr>
+          <td colspan="2">
+          </td>
+          <td style="text-align:center">
+            <%=@flows.count%> / <%=@scenarios.count%>
+          </td>
+          <td style="text-align:center">
+             <input type="submit" name="commit" value="Export Selected" class="btn btn-default btn-xs">
+             <input type="submit" name="commit" value="Delete Selected" class="btn btn-xs btn-danger"/>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+<%= link_to new_feature_path, class: 'btn btn-primary btn-lg' do %>
+  <span class="glyphicon glyphicon-plus"></span>
+  New Feature
+<% end %>
+
+<script type="text/javascript">
+
+   $('#selectAll').click(function() {
+   if (this.checked) {
+       $(':checkbox').each(function() {
+           this.checked = true;                        
+       });
+   } else {
+      $(':checkbox').each(function() {
+           this.checked = false;                        
+       });
+   } 
+});
+
+</script>
+

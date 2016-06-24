@@ -1,0 +1,41 @@
+
+    <h4>Route</h4>
+    <%= @route.path %>
+  <table class="table table-striped">
+  	<thead>
+ 		  <tr>
+        <th width="50%">
+          Fixture
+        </th>
+        <th class="text-center">
+          Route Type
+        </th>
+        <th class="text-center">  
+          Host
+        </th>
+    	</tr>
+    </thead>
+    <tbody>
+		<tr>
+      <td>
+       <textarea rows="25" cols="130">
+        <%=
+        begin
+          json_object = JSON.parse @route.fixture
+          JSON.pretty_generate(json_object)
+        rescue
+          @route.fixture
+        end
+         %>
+       </textarea>
+      </td>
+      <td align="center">
+        <%= @route.route_type %>
+      </td>
+      <td align="center">
+        <%= @route.host %>
+      </td>
+	 </tbody>
+  </table>
+  <a class="btn btn-default" href="/features/<%= @flow[:feature_id] %>/flows/<%= @scenario[:flow_id]%>/scenarios/<%= @scenario[:id]%>">Back</a>
+  <a class="btn btn-primary" href="/features/<%= @flow[:feature_id] %>/flows/<%= @scenario[:flow_id]%>/scenarios/<%=@route.scenario_id%>/routes/<%=@route.id%>/edit">Edit</a>

@@ -1,0 +1,35 @@
+<%@device_scenarios.each do |scenario|%>
+    <li>
+        <%if @scenario_ids.include?(scenario.id)%>
+           <a style="color:orange" id="<%=scenario.id%>"><%=scenario.scenario_name%></a>
+        <%else%>
+           <a id="<%=scenario.id%>"><%=scenario.scenario_name%></a>
+        <%end%>
+        <ul id="scenario-route-<%=scenario.id%>" style="display: none">
+                
+        </ul>
+    </li>
+<%end%>
+
+<script type="text/javascript">
+
+  routes_by_scenario_url = '/report/routes_by_scenario'
+
+  $(document).ready(function(){
+    $('.report-treeview .device-ip .device-scenario a').click(function(){
+      scenario_id = this.id;
+      $flag = $(".report-treeview .device-ip .device-scenario #scenario-route-"+scenario_id).is(':visible');
+      if($flag){
+        $(".report-treeview #scenario-route-"+scenario_id).hide();
+      }else{
+        $.ajax({
+          url: routes_by_scenario_url+"?scenario_id="+scenario_id,
+          success: function(response) {
+            $(".report-treeview #scenario-route-"+scenario_id).show();
+            $("#scenario-route-"+scenario_id).html(response);
+          }
+        });
+      }
+    });
+  });
+</script>

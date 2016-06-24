@@ -1,0 +1,17 @@
+<div class="container-fluid">
+   
+  <%= form_for @feature, :html => { :class => "form-horizontal feature" } do |f| %>
+    <table class="table table-striped">
+      <tr>
+          <td style="border-top:0px">
+            <%= f.label :feature_name %><br/>
+              <%= f.text_field :feature_name,  :size => "50%" %>
+          </td>
+      </tr>
+    </table>
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+              features_path, :class => 'btn btn-default' %>
+
+  <% end %>
+</div>

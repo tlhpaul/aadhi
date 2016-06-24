@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    function highlight_scenario_with_duplicate(scenario_id){
+        $("#"+scenario_id).css("color","orange")
+    }
+  </script>
+<li>
+    <table class="table table-striped table-bordered"><%@scenario_routes.each do |route| %>
+
+            <%if route.count<0%>
+                <tr style="color:red">
+                    <td style="word-break: break-all;" width="95%"><%=route.path%></td><td width="5%"><%=route.count%>
+                    </td>
+                </tr>
+
+            <%elsif route.count>1%>
+            <script>    
+                    highlight_scenario_with_duplicate(<%=route.device_scenario.id%>)
+            </script>
+                <tr style="color:orange">
+                    <td style="word-break: break-all;" width="95%"><%=route.path%></td><td width="5%"><%=route.count%>
+                    </td>
+                </tr>
+
+            <%elsif route.count==0%>
+                <tr style="text-decoration:line-through">
+                    <td style="word-break: break-all;" width="95%"><%=route.path%></td><td width="5%"><%=route.count%>
+                    </td>
+                </tr>
+
+            <%elsif route.count==1%>
+                <tr style="color:green">
+                    <td style="word-break: break-all;" width="95%"><%=route.path%></td><td width="5%"><%=route.count%>
+                    </td>
+                </tr>
+            <%end%>
+        </li>
+        <%end%>
+    </table>
+  </li>
+  

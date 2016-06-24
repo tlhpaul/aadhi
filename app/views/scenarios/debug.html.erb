@@ -1,0 +1,90 @@
+<style>
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+</style>
+<div class="container-fluid">
+	
+	<form class="new_flow" id="new_flow" action="/scenarios/set_current_scenario" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" />
+
+		<table align="left" style="margin-left:2%">
+	         <tr>
+	         	<td>
+	           		 <label for="feature-name" class="control-label">Enter your machine IP address:</label>
+	         
+	            	<input type="text" class="form-control" id="recipient-name" name="device_ip" value="<%=@request_ip%>" size="50%"/>
+	        	</td>
+	        </tr>
+	        <tr>
+	        	<td>
+	           		 <label for="feature-name" class="control-label">Select scenario:</label>
+	           
+	          		<input type="text" class="form-control" id="recipient-name" name="scenario_name" list="scenario_name" autocomplete="off"/>
+	          	</td>
+	        </tr>
+	        <tr>
+	        	<td>
+		             <datalist id="scenario_name">
+		                <%@scenarios.each do |scenario|%>
+		                  <option value="<%=scenario.scenario_name%>">
+		                <%end%>
+		             </datalist>
+		        </td>
+	     	</tr>
+	     	<tr>
+	     		<td>
+	     			 <button type="submit" class="btn btn-primary">Set scenario</button>
+	     		</td>
+	     	<tr>
+	   	</table>
+	</form>
+
+</div> 	
+<div class="page-header" style="margin-left:2%">
+ 		<h3 style="color:black">List of devices/machines with current scenario</h3>
+</div>
+<div style="margin-left:4%; margin-bottom:1%">
+  <a  class="btn btn-xs btn-danger" rel="nofollow" data-method="delete" href="/scenarios/clear_device_list">Clear device list</a>
+</div> 
+<div  style="padding-top:60;" class="result">
+	
+</div>
+
+
+<script>
+
+   url = '/scenarios/device_list';
+   
+    var data_length=0;
+    (function worker() {
+  
+        $.ajax({
+          url: url, 
+          success: function(data) {
+         
+            if(data_length!=data.length)
+            {
+              
+              data_length = data.length
+              $('.result').css("display", "none");
+              $('.result').fadeIn(2000);
+              $('.result').html(data);
+            }
+           
+          },
+          complete: function() {
+            setTimeout(worker, 5000);
+          }
+        });
+    })();
+
+</script>
+
+	
+
+	     		   	

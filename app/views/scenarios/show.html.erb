@@ -1,0 +1,114 @@
+
+	
+	<form class="new_route" id="new_route" action="/features/<%= @flow[:feature_id] %>/flows/<%= @scenario[:flow_id]%>/scenarios/<%=@scenario[:id]%>/routes" accept-charset="UTF-8" method="post">
+	<input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="pWdvo+npH0P1yK39qBcKacH6aljcMzH4ze8z13XeZAIMqSQuafMWWhR/FC01VwJ7Z9apTq5FeIS+Zqg9yGC6PA==" />
+	 <table class="table-hover table-condensed">
+	 	<tr>
+		  <td>
+		    <label for="route_type">Route Type</label>
+		  </td>
+		  <td>
+		    <label for="route_path">Path</label>
+		  </td>
+		   <td>
+		    <label for="query">Query</label>
+		  </td>
+		   <td>
+		    <label for="request_body">Request Body</label>
+		  </td>
+		  <td>
+		    <label for="fixture">Fixture</label>
+		  </td>
+		  <td>
+		    <label for="status">Status</label>
+		  </td>
+		  <td>
+		    <label for="host">Host</label>
+		  </td>
+		</tr>
+	 	<tr>
+		  <td>
+		    <input type="text" name="route[route_type]" id="route_type" value="GET"/>
+		  </td>
+		  <td>
+		    <input type="text" name="route[path]" id="route_path" />
+		  </td>
+		  <td>
+		    <textarea name="route[query]" id="query"></textarea>
+		  </td>
+		  <td>
+		    <input type="text" name="route[request_body]" id="request_body" />
+		  </td>
+		  <td>
+		    <textarea name="route[fixture]" id="fixture" col="200"></textarea>
+		  </td>
+		  <td>
+		    <input type="text" name="route[status]" id="status" value="200"/>
+		  </td>
+		  <td>
+		    <input type="text" name="route[host]" id="host" />
+		  </td>
+		</tr>
+		<tr>
+			<td colspan="7">
+		   	  <input type="submit" name="commit" value="Create Route" class="btn btn-primary"/>
+		   	  <a class="btn btn-default" href="/features/<%= @flow[:feature_id] %>/flows/<%= @scenario[:flow_id]%>">Back</a>
+			</td>
+		</tr>
+    </table>
+</form>
+<form name="copy_or_find_route" action="/scenarios/copy_or_find_route" method="get">
+	  <input type="hidden" name="redirect_path" value="<%=@redirect_path%>"/>
+ 	<div class="page-header"><h4> Scenario: <%= @scenario.scenario_name %></h4></div>
+	<table class="table-striped table-bordered table-hover table-condensed">
+	<thead>
+		<tr>
+			<th>Path</th>
+			<td>Route Type</th>
+			<th>Actions</th>
+			<th style="text-align:center">Copy/ Replace <br/><input type="checkbox" id="selectAll" value="selectAll"></th>
+		</tr>
+	</thead>
+    <tbody>
+		<% @scenario.routes.each do |route| %>
+			<tr>
+				<td style="word-break: break-all;">
+					<a href="/features/<%= @flow[:feature_id] %>/flows/<%= @scenario[:flow_id]%>/scenarios/<%=route[:scenario_id]%>/routes/<%=route[:id]%>"><%= route[:path] %></a>
+				</td>
+				<td>
+					<%= route[:route_type] %>
+				</td>
+				<td style="white-space:nowrap;">
+					<a class="btn btn-default btn-xs" href="/features/<%= @flow[:feature_id] %>/flows/<%= @scenario[:flow_id]%>/scenarios/<%=route[:scenario_id]%>/routes/<%=route[:id]%>/edit">Edit</a>
+					 <a data-confirm="Are you sure?" class="btn btn-xs btn-danger" rel="nofollow" data-method="delete" href="/features/<%= @flow[:feature_id] %>/flows/<%= @scenario[:flow_id]%>/scenarios/<%=route[:scenario_id]%>/routes/<%=route[:id]%>">Delete</a>
+				</td>
+				<td style="text-align:center"> <%= check_box_tag "route_ids[]", route.id %></td>
+			</tr>
+		<% end %>
+			<tr>
+				<td colspan="3">
+				</td>
+				<td>
+					<button type="submit" name="commit" class="btn btn-primary btn-xs" value="Copy to scenario">Copy</button></br> / <br/>
+					<button type="submit" name="commit" class="btn btn-primary btn-xs" value="Find in scenario">Find/ Replace</button><br/>
+				</td>
+			<tr>
+	</tbody>
+</table>
+</form>
+<script type="text/javascript">
+
+   $('#selectAll').click(function() {
+   if (this.checked) {
+       $(':checkbox').each(function() {
+           this.checked = true;                        
+       });
+   } else {
+      $(':checkbox').each(function() {
+           this.checked = false;                        
+       });
+   } 
+});
+
+</script>
+
