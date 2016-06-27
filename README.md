@@ -4,9 +4,9 @@ Local Development and Test virtualization environment, which facilitates quick a
 Usage:
 
  2. Multiple Device support
-         It has the capability to give response to multiple devices simultaneously
+         - It has the capability to give response to multiple devices simultaneously
  3. Export and Import feature
-       Multiple users can work on the same feature without any conflicts
+      - Multiple users can work on the same feature without any conflicts
  4. Refreshing the stubs using the scenario server is easy as the model has been designed to capture  all the required data's for hitting the actual production API.
  5. Displaying the JSON responses in pretty JSON format
  6. Eliminate dependency with actual production environment
