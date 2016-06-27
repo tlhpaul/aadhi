@@ -14,7 +14,7 @@ Usage:
 
 Please follow the below steps to install aadhi using setup script
 
-github.com/gkexplore/AadhiSetup/blob/master/README.md
+http://github.com/gkexplore/AadhiSetup/blob/master/README.md
 
 Useful commands:
 
