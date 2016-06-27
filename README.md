@@ -14,7 +14,7 @@ Usage:
 
 Please follow the below steps to install aadhi using setup script
 
-http://github.com/gkexplore/AadhiSetup/blob/master/README.md
+https://github.com/Nordstrom/aadhi-setup-scripts.git
 
 Useful commands:
 
