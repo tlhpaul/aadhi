@@ -3,7 +3,7 @@ Local Development and Test virtualization environment, which facilitates quick a
 
 Usage:
 
- 1.Eliminate dependency with actual production environment
+  1.Eliminate dependency with actual production environment
      Using actual production/test environment for automation would be cumbersome as there are more chances of false failures due to network latency and change in data setup. Aadhi will help us to run the automation in stable environment and would eliminate false failures.
  2. Multiple Device support
          It has the capability to give response to multiple devices simultaneously
