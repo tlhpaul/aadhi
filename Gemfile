@@ -28,8 +28,7 @@ gem 'bootstrap-sass'
 #memory caching
 gem 'dalli'
 
-#solr indexing
-gem 'sunspot_rails'
+
 
 group :development, :test do
  
