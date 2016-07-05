@@ -95,7 +95,6 @@ GEM
     mysql (2.9.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
-    pr_geohash (1.0.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -125,8 +124,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (11.1.2)
     ref (2.0.0)
-    rsolr (1.1.1)
-      builder (>= 2.1.2)
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -159,13 +156,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sunspot (2.2.5)
-      pr_geohash (~> 1.0)
-      rsolr (~> 1.1.1)
-    sunspot_rails (2.2.5)
-      nokogiri
-      rails (>= 3)
-      sunspot (= 2.2.5)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -206,7 +196,6 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
   spring
-  sunspot_rails
   therubyracer
   turbolinks
   twitter-bootstrap-rails

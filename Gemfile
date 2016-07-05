@@ -29,7 +29,6 @@ gem 'bootstrap-sass'
 gem 'dalli'
 
 
-
 group :development, :test do
  
   # Access an IRB console on exception pages or by using <%= console %> in views
