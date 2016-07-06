@@ -1,57 +1,40 @@
 <div class="container-fluid">
-      <div style="margin-bottom: 45px;
-padding-bottom: 5px;
-border-bottom: 1px solid #eaeaea;
-">
+      <div style="margin-bottom: 45px;padding-bottom: 5px;border-bottom: 1px solid #eaeaea;">
       <h4 >Server Log</h4>
     </div>
   <div class="text-center">
       <a  class="btn btn-xs btn-danger" rel="nofollow" data-method="delete" href="/stubs/clear_server_log">Clear Logs</a> 
   </div> </br>
-  <div style="padding:10px;"><img id="#indicator" src="/assets/ajax-loader.gif"></img><button class="btn btn-xs btn-danger" id="stop">Stop</button>&nbsp;&nbsp;<button class="btn btn-default btn-xs" id="start">Start</button></div>
-  <div class='log'>
-  </div>
+  <img id="refresh"  style="width:5.5%" src="/assets/refresh.png">
+  <img id="indicator" style="display: none;" src="/assets/ajax-loader.gif"></div>
+  <div class='log'></div>
 </div>
- <script type="text/javascript">
-
-$( document ).ready(function() {
-
-  var poll = true;
-  function poll_log(action){
-    poll = action;
-  }
  
-  url = '/stubs/poll_server_log';
-  worker();
+<script type="text/javascript">
 
- $("#stop").click(function(){
-    poll_log(false)
-    $("img").hide();
- });
+  
+  $(document).ready(function(){
+    
+    url = '/stubs/poll_server_log';
 
- $("#start").click(function(){
-  $("img").show();
-    poll_log(true)
-    worker();
- });
+    $("#refresh").click(function(){
+        get_log();
+    });
 
-  function worker() {
-      $("#indicator").show();
-        $.ajax({
-          url: url, 
-          success: function(data) {
-              $("#indicator").hide();
-              $('.log').html(data);
-          },
-          complete: function() { 
-            if (poll===true){
-               setTimeout(worker, 2000);
-            }
-
+   function get_log()
+    {
+      $('#indicator').css("display", "inline-block");
+      $.ajax({
+        url: url, 
+        success: function(data) {
+            $('#indicator').css("display","none");
+            $('.log').css("display","block");
+            $('.log').fadeIn(2000);
+            $('.log').html(data);
           }
-      });
-    }
-});
-
+       });
+      }
+      get_log();
+    });
 
 </script>

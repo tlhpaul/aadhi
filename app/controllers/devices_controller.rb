@@ -244,13 +244,14 @@
 				Notfound.create(:url=>url, :method=>method, :device_ip=>ip_address, :scenario_name=>scenario_name)
 		end
 
-	 private
+	private
 		def save_stubs(url, method, body, response, host, request, headers)
 			@route = Stub.create(:request_url=>url, :route_type=>method, :request_body=>body, :response=>response.body, :status=>response.code, :host=>host, :remote_ip=>request.remote_ip, :headers=>headers)
 			 if @route.save 
 				logger.fatal "Stub has been successfully saved in DB"
 		     end
 		end
+
 	private 
 	    def log_device_ip
              logger.fatal "Device IP:"+get_ip_address.to_s

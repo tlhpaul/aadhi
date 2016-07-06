@@ -10,9 +10,8 @@
             <% @configs.each do |aadhiconfig| %>
               <tr>
                 <td style="margin-left:80%">
-                      <input  name="aadhiconfig[server_mode]" type="radio" value="default" <%= (aadhiconfig.server_mode == "default") ? "checked=\"checked\"" : "" %> onclick="set_proxy('default');" style="margin-left:-3px"/>default
-                      <input  name="aadhiconfig[server_mode]" type="radio" value="record" <%= (aadhiconfig.server_mode == "record") ? "checked=\"checked\"" : "" %> onclick="set_proxy('proxy');"/>proxy
-                      <input name="aadhiconfig[server_mode]" type="radio" value="refresh" <%= (aadhiconfig.server_mode == "refresh") ? "checked=\"checked\"" : "" %> onclick="set_proxy('refresh');"/>refresh
+                      <input  name="aadhiconfig[server_mode]" type="radio" value="default" <%= (aadhiconfig.server_mode == "default") ? "checked=\"checked\"" : "" %> onclick="set_proxy('default');" style="margin-left:-3px"/>Server Mode &nbsp;&nbsp;
+                      <input  name="aadhiconfig[server_mode]" type="radio" value="record" <%= (aadhiconfig.server_mode == "record") ? "checked=\"checked\"" : "" %> onclick="set_proxy('proxy');"/>Proxy Mode
                 </td>
               </tr>
           </tbody>
@@ -37,7 +36,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Bypass proxy settings for these Hosts & Domains <br>
+                        Bypass proxy settings for these Hosts & Domains (Please follw this format: http://sampleurl1.com,https://sampleurl2.com) <br>
                         <textarea name="aadhiconfig[bypass_proxy_domains]" cols="150"><%= aadhiconfig.bypass_proxy_domains%></textarea>
                     </td>
                 </tr>
