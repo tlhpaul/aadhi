@@ -1,24 +1,24 @@
 default: &default
-  adapter: mysql2
+  adapter: mysql
   pool: 5
   timeout: 5000
 
 development:
-  adapter: mysql2
+  adapter: mysql
   database: stubs
   username: root
   password: auto@123
   host: localhost
 
 test:
-  adapter: mysql2
+  adapter: mysql
   database: stubs
   username: root
   password: auto@123
   host: localhost
 
 production:
-  adapter: mysql2
+  adapter: mysql
   database: stubs
   username: root
   password: auto@123
