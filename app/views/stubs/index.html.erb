@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-  <div style="margin-bottom: 45px;padding-bottom: 5px;border-bottom: 1px solid #eaeaea;">
+  <div style="margin-bottom: 45px; padding-bottom: 5px;border-bottom: 1px solid #eaeaea;">
       <h4 >View Request</h4>
     </div>
   <a class="btn btn-default" href="/">Back</a>
@@ -61,14 +61,12 @@
 </form>
 
 
-<script type="text/javascript">
+<script>
 
-    url = '/stubs/poll_log';
+   url = '/stubs/poll_log';
+   
     var data_length=0;
-
-    $("#refresh").click(function(){
-        
-        $('#indicator').css("display", "inline-block")
+    (function worker() {
   
         $.ajax({
           url: url, 
@@ -88,6 +86,6 @@
             setTimeout(worker, 5000);
           }
         });
-    });
+    })();
 
 </script>
