@@ -4,7 +4,7 @@ Local Development and Test virtualization environment, which facilitates quick a
 Usage:
 
  2. Multiple Device support
-         - It has the capability to give response multiple devices simultaneously
+         - It has the capability to give respond multiple devices simultaneously
  3. Export and Import feature
       - Multiple users can work on the same feature without any conflicts
  4. Refreshing the stubs using the AADHI is easy as the model has been designed to capture  all the required data's for         hitting the actual production API.
