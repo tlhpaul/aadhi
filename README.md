@@ -33,11 +33,11 @@ __Usage:__
 
   1. After system reboot, if you find that AADHI is not ruuning while accession http://localhost, then run the below command to start the Apache Server
   
-    sudo apachectl -k start
+       sudo apachectl -k start
 
   2. If you get "could not connect to mysql error while accessing AADHI, then run the below command to start the mysql server"    
   
-     mysql.server start
+       mysql.server start
       
   3. To view the apache log, run - (tail -f -n+100 /var/log/apache2/error_log)
       
