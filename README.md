@@ -12,7 +12,7 @@ Usage:
  6. Eliminating dependency with actual production/test environment
  
      - Using actual production/test environment for automation would be cumbersome as there are more chances of false failures due to network latency and change in data setup. Aadhi will help us to run the automation in stable environment and would eliminate false failures.
- 7. Enabled caching using memcached. All the reqeust url and response would be cached while we regarding the stubs using        proxy mode. This gives excellent performance while responding to automation devices while running in server mode
+ 7. Enabled caching using memcached. All the reqeust url and response would be cached while we regarding the stubs using        proxy mode. This gives excellent performance while responding to automation devices in server mode
 
 Please follow the below link to install aadhi using setup script
 
