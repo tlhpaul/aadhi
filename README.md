@@ -16,18 +16,18 @@ Usage:
 
 How to Setup Aadhi in Mac OSX machine?
 
-    - Please follow the below link to install aadhi using setup script
-
-      https://github.com/Nordstrom/aadhi-setup-scripts.git
+   Please follow the below link to install aadhi using setup script
+   
+   https://github.com/Nordstrom/aadhi-setup-scripts.git
 
 Useful commands:
 
-To start the apache server - sudo apachectl -k start
-
-To start the mysql server - mysql.server start
-
-To view the log run - (tail -f -n+100 /var/log/apache2/error_log)
-
-To stop the apache server - (sudo apachectl stop)
-
-To restart the apache server in debug mode - (sudo apachectl -k restart)
+      To start the apache server - sudo apachectl -k start
+      
+      To start the mysql server - mysql.server start
+      
+      To view the log run - (tail -f -n+100 /var/log/apache2/error_log)
+      
+      To stop the apache server - (sudo apachectl stop)
+      
+      To restart the apache server in debug mode - (sudo apachectl -k restart)
