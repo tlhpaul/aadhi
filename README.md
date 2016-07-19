@@ -20,7 +20,7 @@ __Usage:__
    
    https://github.com/Nordstrom/aadhi-setup-scripts.git
 
-# Useful commands
+# Useful Commands
 
       To start the apache server - sudo apachectl -k start
       
