@@ -35,7 +35,7 @@ __Usage:__
   
        sudo apachectl -k start
 
-  2. If you get "could not connect to mysql error while accessing AADHI, then run the below command to start the mysql server"    
+  2. If you get "could not connect to mysql error" while accessing AADHI, then run the below command to start the mysql server"    
   
        mysql.server start
       
