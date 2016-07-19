@@ -19,6 +19,16 @@ __Usage:__
    Please follow the below link to install aadhi using setup script
    
    https://github.com/Nordstrom/aadhi-setup-scripts.git
+   
+# How to Record and Playback
+
+  1. Point your Native/web app to addhi
+     - Lets assume that your machine ip address is 10.12.100.12 and addhi is running your machine, then we need to configure the app in such way that it hits the aadhi which is running in a particular ip address and each request of your app should have the actual host and query param details.
+       Example: https://10.12.100.12/testhost.com/?format=json&appkey=testkey
+   2. Go to config tab in aadhi and enable Proxy Mode and navigate to View Request page to view the request and responses fired through the app
+   3. Once you done with the recording, store it under particular feature->flow->scenario
+   4. Now switch the aadhi's mode to Server Mode to playback the stubbed response.
+  
 
 # Useful Commands
 
