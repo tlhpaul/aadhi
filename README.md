@@ -29,7 +29,7 @@ __Usage:__
   4. Now switch the aadhi's mode to Server Mode to playback the stubbed response.
   
 
-# Useful Commands
+# Troubleshooting
 
       To start the apache server - sudo apachectl -k start
       
