@@ -1,7 +1,7 @@
 # AADHI
 Local Development and Test virtualization environment, which facilitates quick and easy development and UI automation testing, with easy ways to record and store requests/responses.
 
-Usage:
+__Usage:__
 
  2. Multiple Device support
       - It has the capability to respond multiple devices simultaneously
