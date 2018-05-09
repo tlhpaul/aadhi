@@ -151,7 +151,7 @@
 					log_notfound_request(get_path_query, request.method, get_ip_address, @device.scenario.scenario_name)
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
-					render json: @route.fixture, :status => @route.status
+					render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
 				end
 			end
 		rescue =>e
@@ -182,7 +182,7 @@
 					   render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 					else
 						@route.update(:count=>@route.count+1)
-						render json: @route.fixture, :status => @route.status
+						render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
 					end
 				end
 			end
