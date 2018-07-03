@@ -51,6 +51,7 @@
 
 	def respond_to_app_client
 		log_device_ip
+		log_device_id
 		config =  Aadhiconfig.all
 		case config[0].server_mode
 			when SERVER_MODE::REFRESH
@@ -58,7 +59,7 @@
 				method =  request.method
 				make_request_to_actual_api(method,config)  
 			else
-				@device = Device.find_by(:device_ip=>get_ip_address)
+				@device = Device.find_by(:device_id=>get_id)
 				if @device.blank?
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
@@ -73,7 +74,7 @@
 
 
 	def set_scenario
-	    begin
+		begin
 	      @configs = Aadhiconfig.all
 	      @configs[0].update(:server_mode=>"default")
 		  @scenario = Scenario.find_by(:scenario_name=>params[:scenario_name])
@@ -81,11 +82,11 @@
 		  		logger.fatal "Invalid scenario: #{params[:scenario_name]} \n"
 		    	render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 		  else
-			    @device = Device.find_or_initialize_by(:device_ip=>params[:device_ip])
+				@device = Device.find_or_initialize_by(:device_id=>params[:device_id])
 			    if params[:isReportRequired] == 'yes'
 			    	@device.update(scenario: @scenario, :isReportRequired=>params[:isReportRequired])
-			    	@device_report = DeviceReport.find_or_initialize_by(:device_ip=>params[:device_ip]) 
-			    	@device_report.update(:device_ip=>params[:device_ip])
+			    	@device_report = DeviceReport.find_or_initialize_by(:device_id=>params[:device_id])
+			    	@device_report.update(:device_id=>params[:device_id])
 			    	@scenario = @device_report.device_scenarios.create(:scenario_name=>@device.scenario.scenario_name)
 			    	@device.scenario.routes.each do |route|
 			    		@route = @scenario.scenario_routes.create(:path=>route.path, :fixture=>route.fixture, :route_type=>route.route_type, :status=>route.status)
@@ -104,7 +105,6 @@
 
     private
 	def make_request_to_actual_api(method, config)
-		
 	   	host, path, query, body = get_request_details
 	    conn = Connection.new(host, config)
 	    response = ""
@@ -123,8 +123,11 @@
 			end
 		}
 		t.join
+		headers = t.value[1]
+		headers.delete("aadhi_identifier")
+		t.value[1] = headers
 		save_stubs(host+path<<"?"<<query, method, body, t.value[0], host, request, t.value[1].to_hash)
-                render json: t.value[0].body, :status => t.value[0].code, content_type: t.value[1]['accept'][0]
+		render json: t.value[0].body, :status => t.value[0].code, content_type: t.value[1]['accept'][0]
 	end
 
 
@@ -141,7 +144,8 @@
 	def make_request
 		begin
 			log_device_ip
-			@device = Device.find_by(:device_ip=>get_ip_address)
+			log_device_id
+			@device = Device.find_by(:device_id=>get_id)
 			if @device.blank?
 				log_notfound_request(get_path_query, request.method, get_ip_address)
 				render :json => { :status => '404', :message => 'Not Found'}, :status => 404
@@ -151,7 +155,7 @@
 					log_notfound_request(get_path_query, request.method, get_ip_address, @device.scenario.scenario_name)
 					render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 				else
-					render json: @route.fixture, :status => @route.status
+					render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
 				end
 			end
 		rescue =>e
@@ -164,7 +168,8 @@
 	def make_request_report
 		begin
 			log_device_ip
-			@device = DeviceReport.find_by(:device_ip=>get_ip_address)
+			log_device_id
+			@device = DeviceReport.find_by(:device_ip=>get_id)
 			@scenario = @device.device_scenarios.last
 			if @device.blank?
 				log_notfound_request(get_path_query, request.method, get_ip_address)
@@ -182,7 +187,7 @@
 					   render :json => { :status => '404', :message => 'Not Found'}, :status => 404
 					else
 						@route.update(:count=>@route.count+1)
-						render json: @route.fixture, :status => @route.status
+						render json: @route.fixture, :status => @route.status, content_type: request.headers['accept']
 					end
 				end
 			end
@@ -212,6 +217,11 @@
 			else
 			 ip_address = remote_ip
 			end
+		end
+
+	private
+		def get_id
+			id = request.headers["aadhi-identifier"]
 		end
 
 	private 
@@ -253,8 +263,13 @@
 
 	private 
 	    def log_device_ip
-             logger.fatal "Device IP:"+get_ip_address.to_s
-	    end
+            logger.fatal "Device IP:"+get_ip_address.to_s
+		end
+		
+	private
+		def log_device_id
+			logger.fatal "Device Identifier:"+get_id.to_s
+		end
 end
 
 
